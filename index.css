@@ -1,0 +1,656 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:white;
+    color: white;
+    padding: 0%;
+    margin: 0%;
+    width: 300px;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
+}
+.geral{
+    background-color: rgb(9, 1, 31);
+    width: 1100px;
+    height: 85%;
+    margin-left: 105px;
+margin-right: 25px;
+    margin-top: 30px;
+    justify-content: center;
+    text-align: center;
+    padding-top: 30px;
+
+   
+}
+.nome{
+    padding-left: 98px;
+
+    
+}
+.global{
+    margin-top: 28px;
+    padding-top: 38px;
+    display: flex;
+    gap: 38px;
+    margin-right: 32px;
+    margin-left: 32px;
+    width: 1050px;
+    height: 75%;
+}
+.divLeft{
+    background-color: rgb(19, 8, 46);
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4%;
+    
+}
+.div1{
+    background-color: rgb(44, 23, 97);
+    width: 300px;
+    height: 100px;
+    border-radius: 5%;
+    color: white;
+    
+   margin-left: 48px;
+   margin-right: 40px;
+   display: flex;
+}
+.div2{
+    background-color: rgb(44, 23, 97);
+    width: 300px;
+    height: 100px;
+    border-radius: 5%;
+    color: white;
+   
+    margin-left: 48px;
+    margin-right: 40px;
+    margin-top: 36px;
+    display: flex;
+}
+.divReight{
+    background-color: rgb(44, 23, 97);
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4%; 
+}
+.ob{
+    margin-left: 16px;
+}
+.objecto1{
+    width: 200px;
+    height: 100px;
+  /*  background-color: blue; */
+   margin-left: 32px;
+}
+.objecto2{
+    width: 200px;
+    height: 100px;
+   /* background-color: blue; */
+   margin-left: 32px;
+}
+.img1{
+    width:110px;
+    height: 100px;
+    border-radius: 5%;
+    margin-left: 78px;
+    cursor: pointer;
+}
+.img2{
+    width:110px;
+    height: 100px;
+    border-radius: 5%;
+    margin-left: 62px;
+    cursor: pointer;
+}
+/* Estilos gerais */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Estilos para a imagem */
+  .imagem {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  /* Estilos para o modal */
+  .modal {
+    display: none; /* Inicialmente oculto */
+    position: fixed; /* Fixa a posição sobreposta */
+    top: 0; left: 0; right: 0; bottom: 0; /* Cobrir toda a tela */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    z-index: 1000; /* Garante que o modal esteja acima de outros conteúdos */
+    overflow: auto; /* Habilita rolagem se necessário */
+  }
+  
+  .modal-content {
+    background-color:  rgb(147, 143, 156); /* Cor de fundo do modal */
+    margin: 10% auto; /* Centraliza verticalmente com margem */
+    padding: 0px;
+    margin-left: 138px;
+    border: 1px solid rgb(59, 34, 122);
+    width: 45%; /* Largura do modal */
+    max-width: 500px; /* Largura máxima do modal */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(59, 34, 122);
+  }
+  
+  .close {
+    color: #444343;
+    padding-right: 12px;
+    padding-bottom: 2px;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .divLeftM{
+    background-color: rgb(147, 143, 156);
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4%;
+    
+}
+.div1M{
+    background-color: rgb(147, 143, 156);
+    width: 480px;
+    height: 200px;
+    border-radius: 5%;
+    color: white;
+    
+   margin-left: 0px;
+ 
+   display: flex;
+}
+   
+.capacidade{
+    padding-right: 100px;
+    
+}
+.img1M{
+    width:95px;
+    height: 85px;
+    border-radius: 45%;
+    padding-left: 3px;
+    cursor: pointer;
+} 
+.objecto1M{
+    width: 300px;
+    height: 100px;
+   margin-left: 16px;
+   display: flex;
+  
+}
+input{
+    border-radius: 5%;
+    margin-left: 22px;
+    width:200px ;
+    height: 30px;
+    margin-right: 22px;
+    border-color: rgb(204, 198, 218); 
+    border-radius: 5%;
+    margin-top: 0px;
+    border-bottom: rgb(59, 34, 122);
+}
+.buttonC{
+    width: 280px;
+    height: 50px;
+border-color: rgb(59, 34, 122) ;
+border-radius: 5%;
+text-decoration: none;
+margin-top: 26px;
+margin-left: 50px;
+background-color:  rgb(59, 34, 122);
+color: white;
+cursor: pointer;
+}
+.quantity-input {
+  display: flex;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    height: 40px;
+    background-color: white;
+    margin-right: 270px;
+}
+.button {
+    background-color: white;
+    height: 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    width: 30px;
+    margin: 0; /* Remove a margem entre os botões */
+    justify-content: center;
+   
+}
+/* Opcional: Remover bordas e espaçamentos padrão se necessário */
+
+.quantity-value {
+    width: 70px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 0;
+    height: 30px;
+    margin-left: 78px;
+}
+/* Modal garrafa */
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:white;
+    color: white;
+    padding: 0%;
+    margin: 0%;
+    width: 300px;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
+}
+.geral{
+    background-color: rgb(9, 1, 31);
+    width: 1100px;
+    height: 85%;
+    margin-left: 105px;
+margin-right: 25px;
+    margin-top: 30px;
+    justify-content: center;
+    text-align: center;
+    padding-top: 30px;
+
+   
+}
+.nome{
+    padding-left: 98px;
+
+    
+}
+.global{
+    margin-top: 28px;
+    padding-top: 38px;
+    display: flex;
+    gap: 38px;
+    margin-right: 32px;
+    margin-left: 32px;
+    width: 1050px;
+    height: 75%;
+}
+.divLeft{
+    background-color: rgb(19, 8, 46);
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4%;
+    
+}
+.div1{
+    background-color: rgb(44, 23, 97);
+    width: 300px;
+    height: 100px;
+    border-radius: 5%;
+    color: white;
+    
+   margin-left: 48px;
+   margin-right: 40px;
+   display: flex;
+}
+.div2{
+    background-color: rgb(44, 23, 97);
+    width: 300px;
+    height: 100px;
+    border-radius: 5%;
+    color: white;
+   
+    margin-left: 48px;
+    margin-right: 40px;
+    margin-top: 36px;
+    display: flex;
+}
+.divReight{
+    background-color: rgb(44, 23, 97);
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4%; 
+}
+.ob{
+    margin-left: 16px;
+}
+.objecto1{
+    width: 200px;
+    height: 100px;
+  /*  background-color: blue; */
+   margin-left: 32px;
+}
+.objecto2{
+    width: 200px;
+    height: 100px;
+   /* background-color: blue; */
+   margin-left: 32px;
+}
+.img1{
+    width:110px;
+    height: 100px;
+    border-radius: 5%;
+    margin-left: 78px;
+    cursor: pointer;
+}
+.img2{
+    width:110px;
+    height: 100px;
+    border-radius: 5%;
+    margin-left: 62px;
+    cursor: pointer;
+}
+/* Estilos gerais */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Estilos para a imagem */
+  .imagem {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  /* Estilos para o modal */
+  .modal {
+    display: none; /* Inicialmente oculto */
+    position: fixed; /* Fixa a posição sobreposta */
+    top: 0; left: 0; right: 0; bottom: 0; /* Cobrir toda a tela */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    z-index: 1000; /* Garante que o modal esteja acima de outros conteúdos */
+    overflow: auto; /* Habilita rolagem se necessário */
+  }
+  
+  .modal-content {
+    background-color:  rgb(147, 143, 156); /* Cor de fundo do modal */
+    margin: 10% auto; /* Centraliza verticalmente com margem */
+    padding: 0px;
+    margin-left: 138px;
+    border: 1px solid rgb(59, 34, 122);
+    width: 45%; /* Largura do modal */
+    max-width: 500px; /* Largura máxima do modal */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(59, 34, 122);
+  }
+  
+  .close {
+    color: #444343;
+    padding-right: 12px;
+    padding-bottom: 2px;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .divLeftM{
+    background-color: rgb(147, 143, 156);
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4%;
+    
+}
+.div1M{
+    background-color: rgb(147, 143, 156);
+    width: 480px;
+    height: 200px;
+    border-radius: 5%;
+    color: white;
+    
+   margin-left: 0px;
+ 
+   display: flex;
+}
+   
+.capacidade{
+    padding-right: 100px;
+    
+}
+.img1M{
+    width:95px;
+    height: 85px;
+    border-radius: 45%;
+    padding-left: 3px;
+    cursor: pointer;
+} 
+.objecto1M{
+    width: 300px;
+    height: 100px;
+   margin-left: 16px;
+   display: flex;
+  
+}
+input{
+    border-radius: 5%;
+    margin-left: 22px;
+    width:200px ;
+    height: 30px;
+    margin-right: 22px;
+    border-color: rgb(204, 198, 218); 
+    border-radius: 5%;
+    margin-top: 0px;
+    border-bottom: rgb(59, 34, 122);
+}
+.buttonC{
+    width: 280px;
+    height: 50px;
+border-color: rgb(59, 34, 122) ;
+border-radius: 5%;
+text-decoration: none;
+margin-top: 26px;
+margin-left: 50px;
+background-color:  rgb(59, 34, 122);
+color: white;
+cursor: pointer;
+}
+.quantity-input {
+  display: flex;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    height: 40px;
+    background-color: white;
+    margin-right: 270px;
+}
+.button {
+    background-color: white;
+    height: 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    width: 30px;
+    margin: 0; /* Remove a margem entre os botões */
+    justify-content: center;
+   
+}
+/* Opcional: Remover bordas e espaçamentos padrão se necessário */
+
+.quantity-value {
+    width: 70px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 0;
+    height: 30px;
+    margin-left: 78px;
+}
+/* Modal garrafa */
+
+/* Modal for Garrafa */
+.modal2 {
+    display: none; /* Inicialmente oculto */
+    position: fixed; /* Fixa a posição sobreposta */
+    top: 0; left: 0; right: 0; bottom: 0; /* Cobrir toda a tela */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    z-index: 1000; /* Garante que o modal esteja acima de outros conteúdos */
+    overflow: auto; /* Habilita rolagem se necessário */
+}
+
+/* Modal Content/Box */
+.modal-content2 {
+    background-color:  rgb(147, 143, 156); /* Cor de fundo do modal */
+    margin: 10% auto; /* Centraliza verticalmente com margem */
+    padding: 0px;
+    margin-left: 138px;
+    border: 1px solid rgb(59, 34, 122);
+    width: 45%; /* Largura do modal */
+    max-width: 500px; /* Largura máxima do modal */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(59, 34, 122);
+}
+.close-garrafa{
+    color: #444343;
+    padding-right: 12px;
+    padding-bottom: 2px;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close-garrafa:hover,
+ .close-garrafa:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .divLeftM2{
+    background-color: rgb(147, 143, 156);
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4%;
+    
+}
+.div1M2{
+    background-color: rgb(147, 143, 156);
+    width: 480px;
+    height: 200px;
+    border-radius: 5%;
+    color: white;
+    
+   margin-left: 0px;
+ 
+   display: flex;
+}
+   
+.capacidade2{
+    padding-right: 100px;
+    
+}
+.img2M{
+    width:95px;
+    height: 85px;
+    border-radius: 45%;
+    padding-left: 3px;
+    cursor: pointer;
+} 
+.objecto1M2{
+    width: 300px;
+    height: 100px;
+   margin-left: 16px;
+   display: flex;
+  
+}
+input{
+    border-radius: 5%;
+    margin-left: 22px;
+    width:200px ;
+    height: 30px;
+    margin-right: 22px;
+    border-color: rgb(204, 198, 218); 
+    border-radius: 5%;
+    margin-top: 0px;
+    border-bottom: rgb(59, 34, 122);
+}
+.buttonC2{
+    width: 280px;
+    height: 50px;
+border-color: rgb(59, 34, 122) ;
+border-radius: 5%;
+text-decoration: none;
+margin-top: 26px;
+margin-left: 50px;
+background-color:  rgb(59, 34, 122);
+color: white;
+cursor: pointer;
+}
+.quantity-input2{
+  display: flex;
+    align-items: center;
+}
+
+.button-container2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    height: 40px;
+    background-color: white;
+    margin-right: 270px;
+}
+.button2{
+    background-color: white;
+    height: 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    width: 30px;
+    margin: 0; /* Remove a margem entre os botões */
+    justify-content: center;
+   
+}
+/* Opcional: Remover bordas e espaçamentos padrão se necessário */
+
+.quantity-value2{
+    width: 70px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 0;
+    height: 30px;
+    margin-left: 78px;
+}
