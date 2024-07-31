@@ -13,7 +13,9 @@
             margin: 30px auto;
             display: block;
             width: 400px;
-            height: 400px;
+            height: 280px;
+            background-color: aqua;
+            cursor: pointer;
         }
         
     </style>
@@ -111,7 +113,8 @@
             <span class="close-barrel">&times;</span>
             <h2 style="color: rgba(54, 162, 235, 0.6);">Cadastrar Barril</h2>
             <div class="form-container">
-                <input type="number" id="barrelId" placeholder="Código do barril" step="1">
+                 <label for="barrelId" >ID:</label>
+                <input type="text" id="barrelId" readonly >
                 <input type="number" id="barrelCapacity" placeholder="Capacidade em Litros" step="0.01">
                 <button id="registerBarrel" class="buttonC" type="submit">Cadastrar</button>
             </div>
