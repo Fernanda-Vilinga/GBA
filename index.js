@@ -79,24 +79,51 @@ document.addEventListener('DOMContentLoaded', async () => {
     const incrementButton = document.getElementById('increment');
     const decrementGarrafaButton = document.getElementById('decrementGarrafa');
     const incrementGarrafaButton = document.getElementById('incrementGarrafa');
+    let selectedBarrelId = null; // Armazena o ID do barril selecionado
+     const copoImg = document.getElementById('copoImg');
+     const garrafaImg = document.getElementById('garrafaImg');
+     const copoImgc = document.getElementById('copoImageC');
+     const garrafaImgG = document.getElementById('garrafaImgG');
+     garrafaImg.addEventListener('click', function() {
+        alert('Seleccione um barril para consumires água!')
+       
+    });
+    copoImg.addEventListener('click', function() {
+        alert('Seleccione um barril para consumires água!')
+       
+    });
+    
+    // Fechar modal ao clicar no botão de fechar da garrafa
+    garrafaSpan.addEventListener('click', function() {
+        garrafaModal.style.display = 'none';
+        copoModal.style.display = 'none';
+    });
 
     // Função para atualizar a lista de barris
     async function updateBarrelList() {
-        barrelList.innerHTML = '';
-        const barrels = await getAllBarrels();
-        barrels.forEach(barrel => {
-            const li = document.createElement('li');
-            li.textContent = `Barril ${barrel.id} - Capacidade: ${barrel.capacity} L `;
-            const consumeButton = document.createElement('button');
-            consumeButton.textContent = 'Consumir';
-            consumeButton.onclick = () => {
-                document.getElementById('consumeModal').style.display = 'block';
-                // Atualiza o gráfico para refletir o consumo
-                updateConsumeChart(barrel.id, barrel.capacity);
-            };
-            li.appendChild(consumeButton);
-            barrelList.appendChild(li);
-        });
+        barrelList.innerHTML = ''; // Limpa a lista antes de atualizar
+        try {
+            const barrels = await getAllBarrels();
+            if (barrels.length === 0) {
+                barrelList.innerHTML = '<li>Nenhum barril cadastrado.</li>';
+            } else {
+                barrels.forEach(barrel => {
+                    const li = document.createElement('li');
+                    li.textContent = `Barril ${barrel.id} - Capacidade: ${barrel.capacity} L `;
+                    const consumeButton = document.createElement('button');
+                    consumeButton.textContent = 'Consumir';
+                    consumeButton.onclick = () => {
+                        document.getElementById('consumeModal').style.display = 'block';
+                        document.getElementById('consumeModal').setAttribute('data-barrel-id', barrel.id);
+                        updateConsumeChart(barrel.id, barrel.capacity);
+                    };
+                    li.appendChild(consumeButton);
+                    barrelList.appendChild(li);
+                });
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar a lista de barris:', error);
+        }
     }
 
     // Função para mostrar o modal de cadastro
@@ -111,11 +138,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Registrar novo barril
     registerBarrelButton.onclick = async () => {
-        const barrelId = parseInt(document.getElementById('barrelId').value);
+        const barrelId = parseInt(document.getElementById('barrelId').value, 10);
         const barrelCapacity = parseFloat(document.getElementById('barrelCapacity').value);
-        await addBarrel({ id: barrelId, capacity: barrelCapacity });
-        barrelModal.style.display = 'none';
-        updateBarrelList();
+        if (isNaN(barrelId) || isNaN(barrelCapacity) || barrelId <= 0 || barrelCapacity <= 0) {
+            alert('Por favor, insira um ID e uma capacidade válidos.');
+            return;
+        }
+        try {
+            await addBarrel({ id: barrelId, capacity: barrelCapacity });
+            barrelModal.style.display = 'none';
+            await updateBarrelList(); // Atualiza a lista de barris
+        } catch (error) {
+            console.error('Erro ao registrar barril:', error);
+        }
     };
 
     // Fechar o modal de consumo
@@ -148,8 +183,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Função para atualizar o gráfico de consumo
     function updateConsumeChart(barrelId, capacity) {
-        // Atualize o gráfico com base no consumo
-        // ... (implementação do gráfico de consumo)
+        myChart.data.labels = [`Barril ${barrelId}`];
+        myChart.data.datasets[0].data = [capacity];
+        myChart.update();
     }
 
     // Eventos dos botões de incremento e decremento
@@ -173,18 +209,56 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Confirmar consumo
     confirmButton.onclick = async () => {
         const quantity = parseFloat(quantityInput.value);
-        await consumeFromBarrel(1, quantity); // Ajuste conforme o ID do barril
-        updateBarrelList();
-        consumeModal.style.display = 'none';
+        const barrelId = parseInt(document.getElementById('consumeModal').getAttribute('data-barrel-id'), 10);
+        if (isNaN(barrelId) || isNaN(quantity) || quantity <= 0) {
+            alert('Por favor, insira um ID de barril e uma quantidade válidos.');
+            return;
+        }
+        try {
+            await consumeFromBarrel(barrelId, quantity);
+            await updateBarrelList(); // Atualiza a lista de barris
+            consumeModal.style.display = 'none';
+        } catch (error) {
+            console.error('Erro ao consumir do barril:', error);
+        }
     };
 
     confirmButtonGarrafa.onclick = async () => {
         const quantity = parseFloat(quantityGarrafaInput.value);
-        await consumeFromBarrel(1, quantity); // Ajuste conforme o ID do barril
-        updateBarrelList();
-        consumeModal.style.display = 'none';
+        const barrelId = parseInt(document.getElementById('consumeModal').getAttribute('data-barrel-id'), 10);
+        if (isNaN(barrelId) || isNaN(quantity) || quantity <= 0) {
+            alert('Por favor, insira um ID de barril e uma quantidade válidos.');
+            return;
+        }
+        try {
+            await consumeFromBarrel(barrelId, quantity);
+            await updateBarrelList(); // Atualiza a lista de barris
+            consumeModal.style.display = 'none';
+        } catch (error) {
+            console.error('Erro ao consumir do barril:', error);
+        }
     };
 
     // Atualizar lista de barris ao carregar
-    updateBarrelList();
+    await updateBarrelList();
 });
+confirmButton.onclick = async () => {
+    if (selectedBarrelId === null) {
+        alert('Por favor, selecione um barril para consumo.');
+        return;
+    }
+    const quantity = parseFloat(quantityInput.value);
+    if (isNaN(quantity) || quantity <= 0) {
+        alert('Por favor, insira uma quantidade válida.');
+        return;
+    }
+    try {
+        await consumeFromBarrel(selectedBarrelId, quantity);
+        await updateBarrelList(); // Atualiza a lista de barris
+        consumeModal.style.display = 'none';
+        selectedBarrelId = null; // Resetando o ID do barril selecionado
+    } catch (error) {
+        console.error('Erro ao consumir do barril:', error);
+    }
+};
+
