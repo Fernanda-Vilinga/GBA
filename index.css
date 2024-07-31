@@ -465,6 +465,7 @@ input{
     border-radius: 5%;
     margin-top: 0px;
     border-bottom: rgb(59, 34, 122);
+    color: black;
 }
 .buttonC{
     width: 280px;
@@ -654,3 +655,239 @@ cursor: pointer;
     height: 30px;
     margin-left: 78px;
 }
+/* Estilos para o modal */
+.modal-barrel {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Cor de fundo com opacidade */
+}
+
+/* Estilos para o conteúdo do modal */
+.modal-barrel-content{
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ajuste a largura conforme necessário */
+    max-width: 600px; /* Limite de largura máxima */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra suave */
+}
+
+/* Estilo para o botão de fechar */
+.close-barrel {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Estilo para o botão de fechar ao passar o mouse */
+.close-barrel:hover,
+.close-barrel:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilo do formulário dentro do modal */
+#barrelForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os elementos do formulário */
+}
+
+/* Estilo dos inputs e botão do formulário */
+#barrelForm input,
+#barrelForm button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Estilo do botão de cadastrar barril */
+#registerBarrel {
+    background-color: rgba(54, 162, 235, 0.6); /* Cor de fundo verde */
+    color: white; /* Cor do texto */
+    border: none;
+    cursor: pointer;
+}
+
+/* Alterar cor do botão ao passar o mouse */
+#registerBarrel:hover {
+    background-color: #45a049; /* Cor de fundo verde mais escuro */
+}
+
+/* Estilo da lista de barris */
+#barrelList {
+    list-style-type: none;
+    padding: 0;
+ 
+    gap: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+#barrelList li {
+    background-color: rgba(75, 139, 192, 0.2);
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    gap: 8px;
+    margin-left: 70px;
+    margin-top: 8px;
+    cursor: pointer;
+    border-radius: 5%;
+    width: 320px;
+    height: 25px;
+}
+button{
+    cursor: pointer;
+}
+/* Modal de Consumo */
+.modal-consume {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    margin-left: 10px;
+ margin-right: 0px;
+    padding-top: 0px;
+}
+
+.modal-content-consume {
+    background-color: rgb(9, 1, 31);
+    height: 90%;
+    margin: 5% auto;
+    padding: 0px;
+    border: 1px solid #888;
+    width: 82%;
+    position: relative;
+}
+
+.close-consume-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-consume-modal:hover,
+.close-consume-modal:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Layout do Modal de Consumo */
+.modal-body-consume {
+    background-color: rgb(9, 1, 31);
+    width: 100%;
+    height: 75%;
+    margin-left: 0px;
+margin-right: 40px;
+    margin-top: 0px;
+    justify-content: center;
+    text-align: center;
+    padding-top: 30px;
+    display: flex;
+
+}
+
+.consume-left{
+    background-color: rgb(19, 8, 46);
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4%;
+}
+.consume-right {
+    background-color: rgb(44, 23, 97);
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4%; 
+    margin-left: 30px;
+}
+
+.consume-item {
+    background-color: rgb(44, 23, 97);
+    width: 300px;
+    height: 100px;
+    border-radius: 5%;
+    color: white;
+    
+   margin-left: 48px;
+   margin-right: 40px;
+   display: flex;
+}
+
+.consume-item2{
+    background-color: rgb(44, 23, 97);
+    width: 300px;
+    height: 100px;
+    border-radius: 5%;
+    color: white;
+    margin-top: 32px;
+   margin-left: 48px;
+   margin-right: 40px;
+   display: flex;
+}
+.item-description{
+    margin-left: 16px;
+}
+
+.item-image img {
+    width:95px;
+    height: 100px;
+    border-radius: 5%;
+    padding-left: 142px;
+    cursor: pointer;
+}
+.item-image2 img {
+    width:98px;
+    height: 100px;
+    border-radius: 5%;
+    padding-left: 122px;
+    cursor: pointer;
+}
+
+
+/* Rodapé do Modal */
+.modal-footer-consume {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.exit-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1; /* Garante que o botão esteja acima do conteúdo do modal */
+}
+
+.exit-btn:hover {
+    background-color: #cc0000;
+}
+

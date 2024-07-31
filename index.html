@@ -3,119 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de barrilde água</title>
+    <title>Gestão de Barril de Água</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <style>
-    canvas {
-        max-width: 700px;
-        margin: 30px auto;
-        display: block;
-        width:400PX;
-        height: 400px;
-    }
+        canvas {
+            max-width: 700px;
+            margin: 30px auto;
+            display: block;
+            width: 400px;
+            height: 400px;
+        }
+        
     </style>
 </head>
 <body>
     <div class="geral">
-<h2 class="nome">Gestão De Barril De Água</h2>
-<div class="global">
-<div class="divLeft">
-    <h2>Consumir</h2>
-    <div class="div1">
-        <div class="ob">
-        <h2>Copo</h2>
-        <p style="color: darkgray;">0,25 L</p>
-    </div>
-        <div class="objecto1"> 
-            <img id="copoImg" class="img1" src="COPO.jpeg" alt="">
+        <h2 class="nome">Gestão De Barril De Água</h2>
+        <div class="global">
+            <div class="divLeft">
+                <h2>Consumir</h2>
+                <div class="div1">
+                    <div class="ob">
+                        <h2>Copo</h2>
+                        <p style="color: darkgray;">0,25 L</p>
+                    </div>
+                    <div class="objecto1"> 
+                        <img id="copoImg" class="img1" src="COPO.jpeg" alt="">
+                    </div>
+                </div>
+                <div class="div2">
+                    <div class="ob">
+                        <h2>Garrafa</h2>
+                        <p style="color: darkgray;">1 L</p>
+                    </div>
+                    <div class="objecto2">
+                        <img id="garrafaImg" class="img2" src="GARRA.jpeg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="divReight">
+                <button id="addBarrelButton" class="buttonC">Cadastrar Barril</button>
+                <h2 style="color: rgba(54, 162, 235, 0.6);">Lista de barris disponíveis</h2>
+                <ul id="barrelList"></ul>
+              
+            </div>
         </div>
-        
     </div>
 
-    <div class="div2">
-        <div class="ob">
-        <h2>Garrafa</h2>
-        <p style="color: darkgray;">1 L</p>  </div>
-  
-    <div class="objecto2">
-        <img  id="garrafaImg" class="img2" src="GARRA.jpeg" alt="">  </div>
-  
-    </div>
-</div>
-<div class="divReight">
-    <h2>Estado do Barril</h2>
-    
-    <canvas id="myChart"></canvas>
-    <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100" style="display: none;">
-        <!-- Substitua o conteúdo dentro do <svg> com o seu ícone vetorial de barril de água -->
-        <path d="M17.5 6.5v5c0 1.105-0.895 2-2 2h-1v5h-2v-5h-1c-1.105 0-2-0.895-2-2v-5c0-0.275 0.225-0.5 0.5-0.5h5c0.275 0 0.5 0.225 0.5 0.5zM7.5 8h-1v-2h1v2zM6.5 16h11v-2h-11v2zM12 18.5c0.828 0 1.5-0.672 1.5-1.5s-0.672-1.5-1.5-1.5s-1.5 0.672-1.5 1.5s0.672 1.5 1.5 1.5z"></path>
-    </svg>
-</div>
-    </div>
-    
+    <!-- Modal para consumo com copo -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            <h2 class="nome">Gestão De Barril De Água</h2>
             <div class="divLeftM">
-                <h2 style="color: white;">Consumir por copo </h2>
+                <h2 style="color: white;">Consumir por Copo</h2>
                 <div class="div1M">
                     <div class="obM">
                         <div class="objecto1M"> 
                             <img id="copoImg" class="img1M" src="COPO.jpeg" alt="">
-                           
                         </div>
-                        <h2 class="capacidade">Capacidade : 0,25 L</h2>
+                        <h2 class="capacidade">Capacidade: 0,25 L</h2>
                         <div class="quantity-input">
                             <input type="text" id="quantity" class="quantity-value" value="0" readonly>
                             <div class="button-container">
-                            <button class="button" id="decrement">-</button>
-                            <button class="button" id="increment">+</button>
+                                <button class="button" id="decrement">-</button>
+                                <button class="button" id="increment">+</button>
+                            </div>
                         </div>
-                        </div>
-                        
                         <button id="confirmButton" class="buttonC">Confirmar</button>
-                </div>    
+                    </div>    
                 </div>
-             </div>
-
-<!-- Modal for Garrafa -->
-<div id="garrafaModal" class="modal2">
-    <div class="modal-content2">
-        <span class="close-garrafa">&times;</span>
-        <div class="divLeftM2">
-            <h2 style="color: white;">Consumir por Garrafa</h2>
-            <div class="div1M2">
-                <div class="obM2">
-                    <div class="objecto1M2"> 
-                        <img class="img2M" id="garrafaImg" src="GARRA.jpeg" alt="Garrafa">
-                    </div>
-                    <h2 class="capacidade2">Capacidade: 1 L</h2>
-                    <div class="quantity-input2">
-                        <input type="text" id="quantityGarrafa" class="quantity-value2" value="0" readonly>
-                        <div class="button-container2">
-                            <button class="button2" id="decrementGarrafa">-</button>
-                            <button class="button2" id="incrementGarrafa">+</button>
-                        </div>
-                    </div>
-                    <button id="confirmButtonGarrafa" class="buttonC2">Confirmar</button>
-                </div>    
             </div>
         </div>
     </div>
-</div>
 
-
-             
+    <!-- Modal para consumo com garrafa -->
+    <div id="garrafaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-garrafa">&times;</span>
+            <div class="divLeftM">
+                <h2 style="color: white;">Consumir por Garrafa</h2>
+                <div class="div1M">
+                    <div class="obM">
+                        <div class="objecto1M"> 
+                            <img id="garrafaImg" class="img2M" src="GARRA.jpeg" alt="">
+                        </div>
+                        <h2 class="capacidade">Capacidade: 1 L</h2>
+                        <div class="quantity-input">
+                            <input type="text" id="quantityGarrafa" class="quantity-value" value="0" readonly>
+                            <div class="button-container">
+                                <button class="button" id="decrementGarrafa">-</button>
+                                <button class="button" id="incrementGarrafa">+</button>
+                            </div>
+                        </div>
+                        <button id="confirmButtonGarrafa" class="buttonC">Confirmar</button>
+                    </div>    
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Modal para cadastro de barril -->
+    <div id="barrelModal" class="modal-barrel">
+        <div class="modal-barrel-content">
+            <span class="close-barrel">&times;</span>
+            <h2 style="color: rgba(54, 162, 235, 0.6);">Cadastrar Barril</h2>
+            <div class="form-container">
+                <input type="number" id="barrelId" placeholder="Código do barril" step="1">
+                <input type="number" id="barrelCapacity" placeholder="Capacidade em Litros" step="0.01">
+                <button id="registerBarrel" class="buttonC" type="submit">Cadastrar</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- Modal para consumo de barril -->
+    <div id="consumeModal" class="modal-consume">
+        <div class="modal-content-consume">
+            <span class="close-consume-modal">&times;</span>
+            <h2>Consumir Barril</h2>
+            <div class="modal-body-consume">
+                <div class="consume-left">
+                    <h2>Consumir</h2>
+                    <div class="consume-item">
+                        <div class="item-description">
+                            <h3>Copo</h3>
+                            <p style="color: darkgray;">0,25 L</p>
+                        </div>
+                        <div class="item-image">
+                            <img id="copoImage" class="item-img" src="COPO.jpeg" alt="Copo">
+                        </div>
+                    </div>
+                    <div class="consume-item2">
+                        <div class="item-description">
+                            <h3>Garrafa</h3>
+                            <p style="color: darkgray;">1 L</p>
+                        </div>
+                        <div class="item-image2">
+                            <img id="garrafaImage" class="item-img" src="GARRA.jpeg" alt="Garrafa">
+                        </div>
+                    </div>
+                </div>
+                <div class="consume-right">
+                    <div id="chart-container">
+                        <h2>teste</h2>
+                        <canvas id="consumeChart"></canvas>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="indexeddb.js"></script>
     <script src="grafico.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
-
