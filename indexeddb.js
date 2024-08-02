@@ -1,7 +1,6 @@
 // indexeddb.js
 let db;
 
-// Função para abrir e configurar o banco de dados IndexedDB
 async function openDatabase() {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('gestao_barril', 1);
@@ -26,19 +25,17 @@ async function openDatabase() {
     });
 }
 
-// Função para adicionar ou atualizar um barril
 async function addOrUpdateBarrel(barrel) {
     const db = await openDatabase();
     const transaction = db.transaction('barrels', 'readwrite');
     const store = transaction.objectStore('barrels');
-    store.put(barrel); // Usa put para adicionar ou atualizar o barril
+    store.put(barrel);
     return new Promise((resolve, reject) => {
         transaction.oncomplete = () => resolve();
         transaction.onerror = () => reject(transaction.error);
     });
 }
 
-// Função para obter todos os barris
 async function getAllBarrels() {
     const db = await openDatabase();
     const transaction = db.transaction('barrels', 'readonly');
@@ -50,7 +47,6 @@ async function getAllBarrels() {
     });
 }
 
-// Função para consumir água de um barril
 async function consumeFromBarrel(barrelId, amount) {
     const db = await openDatabase();
     const transaction = db.transaction('barrels', 'readwrite');
@@ -62,7 +58,7 @@ async function consumeFromBarrel(barrelId, amount) {
             const barrel = event.target.result;
             if (barrel) {
                 barrel.capacity -= amount;
-                if (barrel.capacity < 0) barrel.capacity = 0; // Não permitir capacidade negativa
+                if (barrel.capacity < 0) barrel.capacity = 0;
                 store.put(barrel);
                 transaction.oncomplete = () => resolve(barrel);
             } else {
@@ -75,5 +71,4 @@ async function consumeFromBarrel(barrelId, amount) {
     });
 }
 
-// Inicializa o banco de dados (opcional, dependendo de quando você deseja abrir o banco de dados)
-openDatabase();
+openDatabase(); // Inicializa o banco de dados
