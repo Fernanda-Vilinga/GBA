@@ -3,14 +3,14 @@
 let myChart;
 
 // Função para inicializar o gráfico
-function initChart(ctx) {
+function initChart(ctx, initialCapacity) {
     myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['Água Restante'],
             datasets: [{
                 label: 'Quantidade (Litro)',
-                data: [0], // Inicializa com 0, será atualizado depois
+                data: [initialCapacity], // Inicializa com a capacidade total
                 backgroundColor: 'rgba(54, 162, 235, 0.6)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
@@ -20,17 +20,19 @@ function initChart(ctx) {
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 100 // Ajuste conforme necessário
+                    max: initialCapacity // Ajusta o máximo conforme a capacidade inicial
                 }
             }
         }
     });
 }
 
-// Função para atualizar o gráfico com o volume atual
-function updateChart(volume) {
+// Função para atualizar o gráfico com o volume restante
+function updateChart(removedAmount, initialCapacity) {
     if (myChart) {
-        myChart.data.datasets[0].data[0] = volume;
+        const remainingAmount = initialCapacity - removedAmount;
+        myChart.data.datasets[0].data[0] = remainingAmount;
+        myChart.options.scales.y.max = initialCapacity; // Ajusta o máximo do eixo y
         myChart.update();
     }
 }

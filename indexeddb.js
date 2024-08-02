@@ -1,54 +1,37 @@
 // indexeddb.js
+let db;
 
-// Função para abrir o banco de dados IndexedDB
-function openDatabase() {
-    const request = indexedDB.open('gestao_barril', 1);
-
-    request.onupgradeneeded = function(event) {
-        const db = event.target.result;
-        if (!db.objectStoreNames.contains('barrels')) {
-            db.createObjectStore('barrels', { keyPath: 'id' });
-        }
-    };
-
+// Função para abrir e configurar o banco de dados IndexedDB
+async function openDatabase() {
     return new Promise((resolve, reject) => {
-        request.onsuccess = function(event) {
-            resolve(event.target.result);
-        };
-        request.onerror = function(event) {
-            reject(event.target.error);
-        };
-    });
-}
+        const request = indexedDB.open('gestao_barril', 1);
 
-// Função para gerar um ID único para o barril
-async function generateUniqueId() {
-    const db = await openDatabase();
-    const transaction = db.transaction('barrels', 'readonly');
-    const store = transaction.objectStore('barrels');
-    const request = store.openCursor(null, 'prev'); // Abre o cursor na ordem decrescente para pegar o maior ID
-
-    return new Promise((resolve, reject) => {
-        request.onsuccess = function(event) {
-            const cursor = event.target.result;
-            if (cursor) {
-                resolve(cursor.value.id + 1); // Retorna o próximo ID disponível
-            } else {
-                resolve(1); // Se não houver nenhum barril, começa com ID 1
+        request.onupgradeneeded = function(event) {
+            db = event.target.result;
+            if (!db.objectStoreNames.contains('barrels')) {
+                const objectStore = db.createObjectStore('barrels', { keyPath: 'id', autoIncrement: true });
+                objectStore.createIndex('capacity', 'capacity', { unique: false });
             }
         };
+
+        request.onsuccess = function(event) {
+            db = event.target.result;
+            resolve(db);
+        };
+
         request.onerror = function(event) {
+            console.error('Erro ao abrir o IndexedDB', event);
             reject(event.target.error);
         };
     });
 }
 
-// Função para adicionar um barril
-async function addBarrel(barrel) {
+// Função para adicionar ou atualizar um barril
+async function addOrUpdateBarrel(barrel) {
     const db = await openDatabase();
     const transaction = db.transaction('barrels', 'readwrite');
     const store = transaction.objectStore('barrels');
-    store.put(barrel);
+    store.put(barrel); // Usa put para adicionar ou atualizar o barril
     return new Promise((resolve, reject) => {
         transaction.oncomplete = () => resolve();
         transaction.onerror = () => reject(transaction.error);
@@ -72,13 +55,25 @@ async function consumeFromBarrel(barrelId, amount) {
     const db = await openDatabase();
     const transaction = db.transaction('barrels', 'readwrite');
     const store = transaction.objectStore('barrels');
-    const barrel = await store.get(barrelId);
-    if (barrel) {
-        barrel.capacity -= amount;
-        store.put(barrel);
-    }
+    const barrelRequest = store.get(barrelId);
+    
     return new Promise((resolve, reject) => {
-        transaction.oncomplete = () => resolve();
-        transaction.onerror = () => reject(transaction.error);
+        barrelRequest.onsuccess = async function(event) {
+            const barrel = event.target.result;
+            if (barrel) {
+                barrel.capacity -= amount;
+                if (barrel.capacity < 0) barrel.capacity = 0; // Não permitir capacidade negativa
+                store.put(barrel);
+                transaction.oncomplete = () => resolve(barrel);
+            } else {
+                reject('Barril não encontrado');
+            }
+        };
+        barrelRequest.onerror = function(event) {
+            reject(event.target.error);
+        };
     });
 }
+
+// Inicializa o banco de dados (opcional, dependendo de quando você deseja abrir o banco de dados)
+openDatabase();
