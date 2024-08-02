@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const consumeModal = document.getElementById('consumeModal');
     const closeConsumeModal = document.querySelector('.close-consume-modal');
     const confirmButton = document.getElementById('confirmButton');
-    const confirmButtonGarrafa = document.getElementById('confirmButtonGarrafa');
     const quantityInput = document.getElementById('quantity');
     const quantityGarrafaInput = document.getElementById('quantityGarrafa');
     const decrementButton = document.getElementById('decrement');
@@ -15,9 +14,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     const decrementGarrafaButton = document.getElementById('decrementGarrafa');
     const incrementGarrafaButton = document.getElementById('incrementGarrafa');
     let selectedBarrelId = null; // Armazena o ID do barril selecionado
+
     const copoImg = document.getElementById('copoImg');
     const garrafaImg = document.getElementById('garrafaImg');
 
+     const copoImgC = document.getElementById('copoImageC');
+     const copoModal = document.getElementById('myModal');
+    const closeBtn = document.querySelector('.close');
+    const confirmButtonCopo = document.getElementById('confirmButton');
+    const quantityInputCopo = document.getElementById('quantity');
+    const decrementButtonCopo = document.getElementById('decrement');
+    const incrementButtonCopo = document.getElementById('increment');
+
+    const garrafaImageG = document.getElementById('garrfaImageG'); 
+    const garrafaModal = document.getElementById('garrafaModal');
+    const garrafaSpan = document.querySelector('.close-garrafa');
+    const confirmButtonGarrafa = document.getElementById('confirmButtonGarrafa');
+    const quantityGarrafa= document.getElementById('quantityGarrafa');
+    const decrementGarrafa = document.getElementById('decrementGarrafa');
+    const incrementGarrafa = document.getElementById('incrementGarrafa');
+  
+ 
     // Eventos de alerta para imagens
     garrafaImg.addEventListener('click', function() {
         alert('Seleccione um barril para consumires água!');
@@ -26,6 +43,98 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Seleccione um barril para consumires água!');
     });
 
+    
+      // Abrir modal ao clicar na imagem da garrafa 
+    garrafaImageG.addEventListener('click', function() {
+        garrafaModal.style.display = 'block';
+        copoModal.style.display = 'none';
+    
+    });
+  // Fechar modal ao clicar no botão de fechar da garrafa
+  garrafaSpan.addEventListener('click', function() {
+    garrafaModal.style.display = 'none';
+    copoModal.style.display = 'none';
+});
+// Fechar modal se clicar fora da área do modal da garrafa
+window.addEventListener('click', function(event) {
+    if (event.target === copoModal) {
+        copoModal.style.display = 'none';
+        garrafaModal.style.display = 'none';
+    }
+});
+    // Decrementar quantidade de garrafa
+    decrementGarrafa.addEventListener('click', function() {
+        quantityGarrafa.value = Math.max(parseInt(quantityGarrafa.value) - 1, 0);
+    });
+     // Incrementar quantidade da garrafa
+     incrementGarrafa.addEventListener('click', function() {
+        quantityGarrafa.value = parseInt (quantityGarrafa.value) + 1;
+    });
+    // Atualizar gráfico ao confirmar a quantidade consumida do garrafa
+    confirmButtonGarrafa.addEventListener('click', async function() {
+        garrafaModal.style.display = 'none';
+        const quantity = parseInt(quantityGarrafa.value);
+        const waterConsumed = quantity ;
+
+        if (!isNaN(quantity) && quantity >= 0) {
+            const currentVolume = await getVolume();
+            const newVolume = Math.max(currentVolume - waterConsumed, 0);
+
+            await updateVolume(newVolume);
+            updateChart(newVolume);
+            garrafaModal.style.display = 'none';
+        } else {
+            alert('Por favor, insira uma quantidade válida de copos.');
+        }
+    });
+  
+      // Abrir modal ao clicar na imagem do copo
+      copoImgC.addEventListener('click', function() {
+     
+        copoModal.style.display = 'block';
+        garrafaModal.style.display = 'none';
+    });
+
+    // Fechar modal ao clicar no botão de fechar do copo
+    closeBtn.addEventListener('click', function() {
+        copoModal.style.display = 'none';
+    });
+
+    // Fechar modal se clicar fora da área do modal do copo
+    window.addEventListener('click', function(event) {
+        if (event.target === copoModal) {
+            copoModal.style.display = 'none';
+        }
+    });
+
+    // Decrementar quantidade de copos
+    decrementButtonCopo.addEventListener('click', function() {
+        quantityInputCopo.value = Math.max(parseInt(quantityInputCopo.value) - 1, 0);
+    });
+
+    // Incrementar quantidade de copos
+    incrementButtonCopo.addEventListener('click', function() {
+        quantityInputCopo.value = parseInt(quantityInputCopo.value) + 1;
+    });
+
+    // Atualizar gráfico ao confirmar a quantidade consumida do copo
+    confirmButtonCopo.addEventListener('click', async function() {
+        const quantity = parseInt(quantityInputCopo.value);
+        const waterConsumed = quantity ;
+
+        if (!isNaN(quantity) && quantity >= 0) {
+            const currentVolume = await getVolume();
+            const newVolume = Math.max(currentVolume - waterConsumed, 0);
+
+            await updateVolume(newVolume);
+            updateChart(newVolume);
+
+            copoModal.style.display = 'none';
+        } else {
+            alert('Por favor, insira uma quantidade válida de copos.');
+        }
+    });
+   
     // Função para atualizar a lista de barris
     async function updateBarrelList() {
         barrelList.innerHTML = ''; // Limpa a lista antes de atualizar
@@ -182,3 +291,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Atualizar lista de barris ao carregar
     await updateBarrelList();
 });
+
